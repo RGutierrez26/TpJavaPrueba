@@ -29,15 +29,16 @@ public class Usuario extends Base{
     @Override
     public String toString() {
         return "Usuario{" +
-                super.toString() +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", mail='" + mail + '\'' +
-                ", celular='" + celular + '\'' +
-                ", Contraseña='" + Contraseña + '\'' +
-                ", pedidos='" + pedidos + '\'' +
-                ", Rol=" + Rol +
-                '}';
+                "\n\tID='" + this.id + '\'' +
+                ",\n\tnombre='" + nombre + '\'' +
+                ",\n\tapellido='" + apellido + '\'' +
+                ",\n\tmail='" + mail + '\'' +
+                ",\n\tcelular='" + celular + '\'' +
+                ",\n\tcontraseña='" + Contraseña + '\'' +
+                ",\n\trol=" + Rol +
+                ",\n\t............................" +
+                ",\n\tpedidos=" + (pedidos == null ? "[]" : pedidos) +
+                "\n}";
     }
 
     @Override

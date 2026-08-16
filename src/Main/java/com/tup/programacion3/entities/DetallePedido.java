@@ -19,11 +19,11 @@ public class DetallePedido extends Base{
     @Override
     public String toString() {
         return "DetallePedido{" +
-                super.toString() +
-                "Cantidad=" + Cantidad +
-                ", Subtotal=" + Subtotal +
-                ", producto=" + producto +
-                '}';
+                "\n\tID='" + this.id + '\'' +
+                ",\n\tcantidad=" + Cantidad +
+                ",\n\tsubtotal=" + Subtotal +
+                ",\n\tproducto=" + producto +
+                "\n}";
     }
 
     @Override

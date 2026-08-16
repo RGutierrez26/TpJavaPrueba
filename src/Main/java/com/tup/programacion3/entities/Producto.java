@@ -78,15 +78,15 @@ public class Producto extends Base {
     @Override
     public String toString() {
         return "Producto{" +
-                super.toString() +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", descripcion='" + descripcion + '\'' +
-                ", stock=" + stock +
-                ", imagen='" + imagen + '\'' +
-                ", disponible=" + disponible +
-                ", categorias=" + categorias +
-                '}';
+                "\n\tID='" + this.id + '\'' +
+                ",\n\tnombre='" + nombre + '\'' +
+                ",\n\tprecio=" + precio +
+                ",\n\tdescripcion='" + descripcion + '\'' +
+                ",\n\tstock=" + stock +
+                ",\n\timagen='" + imagen + '\'' +
+                ",\n\tdisponible=" + disponible +
+                ",\n\tcategorias=" + (categorias == null ? "[]" : categorias) +
+                "\n}";
     }
 
     public int getStock() {

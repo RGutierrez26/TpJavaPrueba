@@ -16,7 +16,11 @@ public class Categoria extends Base {
 
     @Override
     public String toString(){
-        return super.toString()+" Nombre: "+this.nombre+" Descripcion: "+this.descripcion;
+        return "Categoria{" +
+                "\n\tID='" + this.id + '\'' +
+                ",\n\tnombre='" + this.nombre + '\'' +
+                ",\n\tdescripcion='" + this.descripcion + '\'' +
+                "\n}";
     }
 
     @Override

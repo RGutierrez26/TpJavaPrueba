@@ -69,7 +69,7 @@ public class Main {
             System.out.println(producto.toString());
         }
         //mostrar pedidos del usuario con mas pedidos
-        System.out.println(u1.toString());
+        System.out.println( "Pedidos del usuario 1 "+ u1.toString());
 
         Producto productoCopia =new Producto(p1); // Crear una copia del producto p1
         for(Producto producto : productos){
