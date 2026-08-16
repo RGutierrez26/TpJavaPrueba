@@ -37,6 +37,19 @@ public class Producto extends Base {
         this.imagen = imagen;
         this.disponible = disponible;
     }
+    public Producto(Producto producto) { //constructor de copia para copiar el producto original
+        super();
+        this.id = producto.id; // Copiar el id del producto original
+        this.nombre = producto.nombre;
+        this.precio = producto.precio;
+        this.descripcion = producto.descripcion;
+        this.stock = producto.stock;
+        this.imagen = producto.imagen;
+        this.disponible = producto.disponible;
+        if (producto.categorias != null) {
+            this.categorias = new HashSet<>(producto.categorias); // Copiar las categorías si existen
+        }
+    }
 
     public void AgregarCategoria(Categoria categoria) {
         if (categorias == null) {

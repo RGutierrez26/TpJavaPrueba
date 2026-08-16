@@ -47,52 +47,37 @@ public class Main {
         Usuario u1 = new Usuario("Juan","Perez","juan@mail.com","123456789","pass1", Rol.usuario);
         Usuario u2 = new Usuario("Maria","Lopez","maria@mail.com","987654321","pass2", Rol.usuario);
 
-        // 3 Pedidos: asignar a usuarios (u1 -> 2 pedidos, u2 -> 1 pedido)
-        Map<Usuario,List<Pedido>> pedidosPorUsuario = new HashMap<>();
-        pedidosPorUsuario.put(u1,new ArrayList<>());
-        pedidosPorUsuario.put(u2,new ArrayList<>());
+        // Crear un pedido para el usuario 1
+        Pedido pedido1 = new Pedido( FormaPago.tarjeta, 2, p1); // 2 Laptops
+        pedido1.addDetallePedido(3, p5); // 3 Mouse
+        pedido1.addDetallePedido(1, p3); // 1 Libro Java
+        pedido1.addDetallePedido(1,p1); //3 laptos
+        Pedido pedido2 = new Pedido( FormaPago.efectivo, 1, p2); // 1 Camiseta
+        pedido2.addDetallePedido(2, p7); // 2 Pantalones
+        pedido2.addDetallePedido(1, p8);
+        Pedido pedido3 = new Pedido( FormaPago.efectivo, 1, p3);
+        pedido3.addDetallePedido(2, p10);
 
-        // Pedido 1 for u1
-        Pedido pedido1 = new Pedido(LocalDate.now(),0.0, FormaPago.efectivo, new HashSet<>(),1,p1);
-        pedido1.addDetallePedido(2,p4);
-        pedido1.CalcularTotal();
-        pedidosPorUsuario.get(u1).add(pedido1);
+        u1.AgregarPedido(pedido1);
+        u2.AgregarPedido(pedido2);
+        u1.AgregarPedido(pedido3);
 
-        // Pedido 2 for u1
-        Pedido pedido2 = new Pedido(LocalDate.now().minusDays(1),0.0, FormaPago.tarjeta, new HashSet<>(),2,p2);
-        pedido2.addDetallePedido(1,p5);
-        pedido2.CalcularTotal();
-        pedidosPorUsuario.get(u1).add(pedido2);
-
-        // Pedido 3 for u2
-        Pedido pedido3 = new Pedido(LocalDate.now(),0.0, FormaPago.transferencia, new HashSet<>(),3,p3);
-        pedido3.addDetallePedido(1,p6);
-        pedido3.CalcularTotal();
-        pedidosPorUsuario.get(u2).add(pedido3);
-
-        // 4.a Mostrar un producto por consola (usar toString)
-        System.out.println("Producto de ejemplo:\n" + p1);
-
-        // 4.b Mostrar listado de productos cargados
-        System.out.println("\nListado de productos:");
-        for (Producto p: productos) System.out.println(p);
-
-        // 4.c Mostrar pedidos del usuario que más pedidos posea
-        Usuario top = null; int max = -1;
-        for (Map.Entry<Usuario,List<Pedido>> e: pedidosPorUsuario.entrySet()){
-            if (e.getValue().size() > max){ max = e.getValue().size(); top = e.getKey(); }
+        // mostrar un producto y el catalogo
+        System.out.println(p1.toString());
+        System.out.println("Catálogo de productos:");
+        for (Producto producto : productos) {
+            System.out.println(producto.toString());
         }
-        System.out.println("\nUsuario con más pedidos: " + top);
-        System.out.println("Pedidos de ese usuario:");
-        for (Pedido ped: pedidosPorUsuario.get(top)) System.out.println(ped);
+        //mostrar pedidos del usuario con mas pedidos
+        System.out.println(u1.toString());
 
-        // 5. Instanciar un producto nuevo con el mismo id que p1 y compararlo con la colección
-        String idExistente = p1.getId();
-        Producto duplicado = new Producto(idExistente, "Laptop-clone",1500.0,"Laptop clónica",5,"laptop2.jpg",true);
-
-        System.out.println("\nComparando producto duplicado (mismo id) con la colección:");
-        for (Producto p: productos){
-            System.out.println("Comparando con producto id="+p.getId()+": " + duplicado.equals(p));
+        Producto productoCopia =new Producto(p1); // Crear una copia del producto p1
+        for(Producto producto : productos){
+            if(producto.equals(productoCopia)){
+                System.out.println("El producto es igual a la copia del producto ");
+            }else{
+                System.out.println("El producto es diferente a la copia del producto ");
+            }
         }
     }
 }

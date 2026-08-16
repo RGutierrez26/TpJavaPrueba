@@ -17,14 +17,14 @@ public class Pedido extends Base implements Calculable  {
     private FormaPago formaPago;
     private Set<DetallePedido> detallePedido = new HashSet<>();
 
-    public Pedido( LocalDate fecha, Double total, FormaPago formaPago, HashSet<DetallePedido> detallePedido,int cantidad,Producto producto) {
+    public Pedido(FormaPago formaPago,int cantidad,Producto producto) {
         super();
-        this.fecha = fecha;
+        this.fecha = LocalDate.now();
         this.estado = Estado.pendiente;
-        this.total = total;
         this.formaPago = formaPago;
         DetallePedido detalle = new DetallePedido(cantidad,producto);
         this.detallePedido.add(detalle);
+        this.total=detalle.getSubtotal();
     }
 
     @Override
@@ -41,11 +41,13 @@ public class Pedido extends Base implements Calculable  {
     public void addDetallePedido(int cantidad,Producto producto){
 
         if (producto.getStock() > cantidad) {
-            producto.setStock(producto.getStock() - cantidad);
-            for (DetallePedido detallePedido : detallePedido) {
+            producto.setStock(producto.getStock() - cantidad); //restar stock
+            total=total+cantidad*producto.getPrecio(); //suma total
+            for (DetallePedido detallePedido : detallePedido) {  //para ver si ya esta en el set
                 if (detallePedido.getProducto().equals(producto)) {
-                    detallePedido.setCantidad(detallePedido.getCantidad() + cantidad);
-                    detallePedido.setSubtotal(detallePedido.getProducto().getPrecio() * detallePedido.getCantidad());
+                    detallePedido.setCantidad(detallePedido.getCantidad() + cantidad); //agrega cantidad
+                    detallePedido.setSubtotal(detallePedido.getProducto().getPrecio() * detallePedido.getCantidad()); //suma subtotal
+
                     return;
                 }
             }

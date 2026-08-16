@@ -19,7 +19,7 @@ public abstract class   Base {
 
     @Override
     public String toString(){
-        return "ID: "+this.id+" Eliminado: "+this.eliminado+" Creado en: "+this.createdAt;
+        return "ID: "+this.id;
     }
 
     public Boolean getEliminado() {

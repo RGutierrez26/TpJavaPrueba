@@ -3,6 +3,7 @@ import  Main.java.com.tup.programacion3.enums.Rol;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class Usuario extends Base{
 
@@ -12,6 +13,7 @@ public class Usuario extends Base{
     private String celular;
     private String Contraseña;
     private Rol Rol;
+    private Set<Pedido> pedidos;
 
     public Usuario(String nombre,String apellido, String mail,String celular,String contraseña,Rol Rol){
         super();
@@ -33,6 +35,7 @@ public class Usuario extends Base{
                 ", mail='" + mail + '\'' +
                 ", celular='" + celular + '\'' +
                 ", Contraseña='" + Contraseña + '\'' +
+                ", pedidos='" + pedidos + '\'' +
                 ", Rol=" + Rol +
                 '}';
     }
@@ -48,5 +51,11 @@ public class Usuario extends Base{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id);
+    }
+    public void AgregarPedido(Pedido pedido) {
+        if (pedidos == null) {
+            pedidos = new java.util.HashSet<>();
+        }
+        pedidos.add(pedido);
     }
 }
