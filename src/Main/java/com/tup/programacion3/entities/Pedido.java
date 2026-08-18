@@ -60,7 +60,15 @@ public class Pedido extends Base implements Calculable  {
     }
 
     public void deleteDetallePedidoByProducto(Producto producto) {
+        for(DetallePedido detalle : detallePedido) {
+            if (detalle.getProducto().equals(producto)) {
+                producto.setStock(producto.getStock() + detalle.getCantidad()); //sumar stock
+                total=total-detalle.getSubtotal(); //resta total
+                break;
+            }
+        }
         detallePedido.removeIf(detalle -> detalle.getProducto().equals(producto));
+
     }
 
     public DetallePedido findeDetallePedidoByProducto(Producto producto) {
