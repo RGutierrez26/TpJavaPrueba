@@ -42,21 +42,21 @@ public class Pedido extends Base implements Calculable  {
 
         if (producto.getStock() > cantidad) {
             producto.setStock(producto.getStock() - cantidad); //restar stock
-            total=total+cantidad*producto.getPrecio(); //suma total
-            for (DetallePedido detallePedido : detallePedido) {  //para ver si ya esta en el set
-                if (detallePedido.getProducto().equals(producto)) {
-                    detallePedido.setCantidad(detallePedido.getCantidad() + cantidad); //agrega cantidad
-                    detallePedido.setSubtotal(detallePedido.getProducto().getPrecio() * detallePedido.getCantidad()); //suma subtotal
+            DetallePedido detalleBuscado = this.findeDetallePedidoByProducto(producto); //busca si ya existe el producto en el set
+                if (detalleBuscado != null) {
+                    detalleBuscado.setCantidad(detalleBuscado.getCantidad() + cantidad); //agrega cantidad
+                    detalleBuscado.setSubtotal(detalleBuscado.getProducto().getPrecio() * detalleBuscado.getCantidad()); //suma subtotal
 
-                    return;
+                }else{
+                    DetallePedido detalle = new DetallePedido(cantidad, producto);
+                    this.detallePedido.add(detalle);
                 }
             }
-            DetallePedido detalle = new DetallePedido(cantidad, producto);
-            this.detallePedido.add(detalle);
-
-        }else {
+        else {
             System.out.println("No hay suficiente stock para el producto: " + producto);
+            return;
         }
+        this.CalcularTotal();
     }
 
     public void deleteDetallePedidoByProducto(Producto producto) {

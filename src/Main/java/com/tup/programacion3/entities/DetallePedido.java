@@ -31,12 +31,12 @@ public class DetallePedido extends Base{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         DetallePedido that = (DetallePedido) o;
-        return this.id == that.id;
+        return Objects.equals(producto, that.producto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), this.id);
+        return Objects.hash(super.hashCode(), producto);
     }
 
     public int getCantidad() {
